@@ -1,0 +1,19 @@
+{
+  "name": "walrusjs",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "bufferutil": "^4.0.9",
+    "discord.js": "^14.17.3",
+    "dotenv": "^16.4.7",
+    "math-expression-evaluator": "^2.0.6",
+    "zlib-sync": "^0.1.9"
+  }
+}
