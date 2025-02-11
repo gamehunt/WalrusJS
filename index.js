@@ -1,8 +1,17 @@
-import { Client, Events, GatewayIntentBits } from 'discord.js';
+import { Client, Events, GatewayIntentBits, ActivityType } from 'discord.js';
 import 'dotenv/config';
 import { evaluate } from './engine.js';
 
-const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
+const client = new Client({
+    intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent],
+    presence: {
+        activities: [{
+            name: 'за кубами',
+            type: ActivityType.Watching,
+        }],
+        status: 'online',
+    },
+});
 
 client.on(Events.ClientReady, readyClient => {
   console.log(`Logged in as ${readyClient.user.tag}!`);
