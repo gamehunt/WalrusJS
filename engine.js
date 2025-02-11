@@ -106,6 +106,8 @@ function eval_expr(content) {
             return null;
         }
     }
+    const replacement_map = {};
+    let index = 0;
     for (const dice of dices) {
         const amount = dice[1].length == 0 ? 1 : parseInt(dice[1]);
         const sides = parseInt(dice[2]);
@@ -133,8 +135,14 @@ function eval_expr(content) {
         else {
             r = sr.reduce((partialSum, a) => partialSum + a, 0);
         }
-        copy = copy.replace(dice[0], `[${vsr.join(', ')}] $&`);
+        replacement_map[index] = `[${vsr.join(', ')}] ${dice[0]}`;
+        copy = copy.replace(dice[0], `dice_${index}`);
+        index++;
         content = content.replace(dice[0], r.toString());
+    }
+
+    for (let i = 0; i < index; i++) {
+        copy = copy.replace(`dice_${i}`, replacement_map[i]);
     }
 
     const result = mexp.eval(content);
