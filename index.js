@@ -1,6 +1,6 @@
 import { Client, Events, GatewayIntentBits } from 'discord.js';
 import 'dotenv/config';
-import {evaluate} from './engine.js';
+import { evaluate } from './engine.js';
 
 const client = new Client({ intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages, GatewayIntentBits.MessageContent] });
 
@@ -17,17 +17,18 @@ client.on(Events.InteractionCreate, async interaction => {
 });
 
 client.on(Events.MessageCreate, async event => {
-    if(event.author.bot) {
+    if (event.author.bot) {
         return;
     }
 
     try {
         const r = evaluate(event.content);
-        if(r) {
+        if (r && r.length < 2000) {
             await event.reply(r);
         }
-    } catch(e) {
-        // console.log(e);
+    }
+    catch (e) {
+        console.log(e);
     }
 });
 
